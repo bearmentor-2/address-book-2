@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Book 2</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+    <h1>Address Book 2</h1>
+
+    <main>
+      <section id="add-contact">
+        <form id="add-contact-form">
+          <div>
+            <label for="full-name">Full name:</label>
+            <input
+              type="text"
+              id="full-name"
+              name="full-name"
+              placeholder="Steve Jobs"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="email">Email address:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="steve@apple.com"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="phone">Phone number:</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="+1-234-456"
+              required
+            />
+          </div>
+
+          <div>
+            <button type="submit">Create Contact</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="contacts">
+        <ul>
+          <li>
+            <h2>Steve Jobs</h2>
+            <p>steve@apple.com</p>
+            <p>+1-234-567</p>
+          </li>
+          <li>
+            <h2>Bill Gates</h2>
+            <p>bill@microsoft.com</p>
+            <p>+1-987-654</p>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
