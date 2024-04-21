@@ -19,4 +19,21 @@ const contacts = [
   },
 ];
 
-console.log(contacts);
+for (let index = 0; index < contacts.length; index++) {
+  const contact = contacts[index];
+
+  const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
+
+  const contactText = `
+  ${contact.fullName} (${contact.nickName}) is ${contact.age} years old
+  
+  Email: ${contact.email}
+  Phone: ${contact.phone}
+
+  Address: ${contact.address}
+
+  ${aliveText}
+  `;
+
+  console.log(contactText);
+}
