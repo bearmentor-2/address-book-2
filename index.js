@@ -1,5 +1,6 @@
 const contacts = [
   {
+    id: 1,
     fullName: "Steven Paul Jobs",
     nickName: "Steve",
     email: "steve@apple.com",
@@ -10,6 +11,7 @@ const contacts = [
     birthday: new Date("1955-02-24"),
   },
   {
+    id: 2,
     fullName: "William Henry Gates III",
     nickName: "Bill",
     email: "bill@microsoft.com",
@@ -45,4 +47,41 @@ function renderContacts() {
   }
 }
 
-renderContacts();
+function addContact() {
+  const newContact = {
+    id: 3,
+    fullName: "M Haidar Hanif",
+    nickName: "Haidar",
+    email: "haidar@haidar.com",
+    phone: "+62-812-3456-789",
+    age: 30,
+    isAlive: true,
+    address: "Bandung, Jawa Barat, Indonesia",
+    birthday: new Date("1993-05-23"),
+  };
+
+  const result = contacts.push(newContact);
+
+  renderContacts();
+}
+
+function searchContacts(keyword) {
+  const searchedContacts = contacts.filter((contact) => {
+    return contact.fullName.toLowerCase().includes(keyword.toLowerCase());
+  });
+
+  console.log(searchedContacts);
+}
+
+function getContactById(id) {
+  const contact = contacts.find((contact) => {
+    return contact.id === id;
+  });
+
+  console.log(contact);
+}
+
+enderContacts();
+addContact();
+searchContacts("gates");
+getContactById(1);
