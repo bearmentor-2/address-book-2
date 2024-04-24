@@ -7,6 +7,7 @@ const contacts = [
     age: 56,
     isAlive: false,
     address: "Palo Alto, California, USA",
+    birthday: new Date("1955-02-24"),
   },
   {
     fullName: "William Henry Gates III",
@@ -16,24 +17,32 @@ const contacts = [
     age: 68,
     isAlive: true,
     address: "Seattle, Washington, USA",
+    birthday: new Date("1955-10-28"),
   },
 ];
 
-for (let index = 0; index < contacts.length; index++) {
-  const contact = contacts[index];
+// console.log(contacts);
 
-  const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
+function renderContacts() {
+  for (let index = 0; index < contacts.length; index++) {
+    const contact = contacts[index];
 
-  const contactText = `
+    const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
+
+    const contactText = `
   ${contact.fullName} (${contact.nickName}) is ${contact.age} years old
   
   Email: ${contact.email}
   Phone: ${contact.phone}
+  Bithday: ${contact.birthday}
 
   Address: ${contact.address}
 
   ${aliveText}
   `;
 
-  console.log(contactText);
+    console.log(contactText);
+  }
 }
+
+renderContacts();
