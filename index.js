@@ -1,6 +1,7 @@
+const addContactFormElement = document.getElementById("add-contact-form");
 const contactsListElement = document.getElementById("contacts");
 
-const contacts = [
+let dataContacts = [
   {
     id: 1,
     fullName: "Steven Paul Jobs",
@@ -26,7 +27,10 @@ const contacts = [
 ];
 
 function renderContacts() {
-  const contactsString = contacts
+  const contactsToDisplay = structuredClone(dataContacts);
+
+  const contactsString = contactsToDisplay
+    .reverse()
     .map((contact) => {
       const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
 
@@ -45,26 +49,34 @@ function renderContacts() {
   contactsListElement.innerHTML = contactsString;
 }
 
-function addContact() {
+function addContact(event) {
+  event.preventDefault();
+
+  const formData = new FormData(this);
+
+  console.log(dataContacts);
+
+  const nextId = dataContacts[dataContacts.length - 1].id + 1;
+
   const newContact = {
-    id: 3,
-    fullName: "M Haidar Hanif",
-    nickName: "Haidar",
-    email: "haidar@haidar.com",
-    phone: "+62-812-3456-789",
-    age: 30,
+    id: nextId,
+    fullName: formData.get("full-name"),
+    nickName: "",
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    age: 0,
     isAlive: true,
-    address: "Bandung, Jawa Barat, Indonesia",
-    birthday: new Date("1993-05-23"),
+    address: "",
+    birthday: new Date("2000-01-01"),
   };
 
-  const result = contacts.push(newContact);
+  dataContacts = [...dataContacts, newContact];
 
   renderContacts();
 }
 
 function searchContacts(keyword) {
-  const searchedContacts = contacts.filter((contact) => {
+  const searchedContacts = dataContacts.filter((contact) => {
     return contact.fullName.toLowerCase().includes(keyword.toLowerCase());
   });
 
@@ -72,11 +84,13 @@ function searchContacts(keyword) {
 }
 
 function getContactById(id) {
-  const contact = contacts.find((contact) => {
+  const contact = dataContacts.find((contact) => {
     return contact.id === id;
   });
 
   console.log(contact);
 }
+
+addContactFormElement.addEventListener("submit", addContact);
 
 renderContacts();
