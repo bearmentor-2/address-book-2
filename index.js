@@ -27,7 +27,14 @@ let dataContacts = [
 ];
 
 function renderContacts() {
-  const contactsToDisplay = structuredClone(dataContacts);
+  const searchParams = new URLSearchParams(window.location.search);
+  const keyword = searchParams.get("q");
+
+  const filteredContacts = keyword
+    ? searchContacts(dataContacts, keyword)
+    : dataContacts;
+
+  const contactsToDisplay = structuredClone(filteredContacts);
 
   const contactsString = contactsToDisplay
     .reverse()
@@ -54,8 +61,6 @@ function addContact(event) {
 
   const formData = new FormData(this);
 
-  console.log(dataContacts);
-
   const nextId = dataContacts[dataContacts.length - 1].id + 1;
 
   const newContact = {
@@ -75,12 +80,11 @@ function addContact(event) {
   renderContacts();
 }
 
-function searchContacts(keyword) {
-  const searchedContacts = dataContacts.filter((contact) => {
+function searchContacts(contacts, keyword) {
+  const searchedContacts = contacts.filter((contact) => {
     return contact.fullName.toLowerCase().includes(keyword.toLowerCase());
   });
-
-  console.log(searchedContacts);
+  return searchedContacts;
 }
 
 function getContactById(id) {
