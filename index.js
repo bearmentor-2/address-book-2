@@ -1,3 +1,5 @@
+const contactsListElement = document.getElementById("contacts");
+
 const contacts = [
   {
     id: 1,
@@ -23,28 +25,24 @@ const contacts = [
   },
 ];
 
-// console.log(contacts);
-
 function renderContacts() {
-  for (let index = 0; index < contacts.length; index++) {
-    const contact = contacts[index];
+  const contactsString = contacts
+    .map((contact) => {
+      const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
 
-    const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
+      return `<li>
+      <h2>${contact.fullName} (${contact.nickName})</h2>
+      <p>Age: ${contact.age} years old</p>
+      <p>Email: ${contact.email}</p>
+      <p>Phone: ${contact.phone}</p>
+      <p>Bithday: ${contact.birthday}</p>
+      <p>Address: ${contact.address}</p>
+      <p>${aliveText}</p>
+    </li>`;
+    })
+    .join("");
 
-    const contactText = `
-  ${contact.fullName} (${contact.nickName}) is ${contact.age} years old
-  
-  Email: ${contact.email}
-  Phone: ${contact.phone}
-  Bithday: ${contact.birthday}
-
-  Address: ${contact.address}
-
-  ${aliveText}
-  `;
-
-    console.log(contactText);
-  }
+  contactsListElement.innerHTML = contactsString;
 }
 
 function addContact() {
@@ -81,7 +79,4 @@ function getContactById(id) {
   console.log(contact);
 }
 
-enderContacts();
-addContact();
-searchContacts("gates");
-getContactById(1);
+renderContacts();
