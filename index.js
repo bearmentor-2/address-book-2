@@ -1,7 +1,7 @@
 const addContactFormElement = document.getElementById("add-contact-form");
 const contactsListElement = document.getElementById("contacts");
 
-let dataContacts = [
+let initialDataContacts = [
   {
     id: 1,
     fullName: "Steven Paul Jobs",
@@ -26,9 +26,26 @@ let dataContacts = [
   },
 ];
 
+function saveContacts(newDataContacts) {
+  localStorage.setItem("dataContacts", JSON.stringify(newDataContacts));
+}
+
+function loadContacts() {
+  const dataContacts = JSON.parse(localStorage.getItem("dataContacts"));
+
+  if (!dataContacts) {
+    saveContacts(initialDataContacts);
+    return initialDataContacts;
+  } else {
+    return dataContacts;
+  }
+}
+
 function renderContacts() {
   const searchParams = new URLSearchParams(window.location.search);
   const keyword = searchParams.get("q");
+
+  const dataContacts = loadContacts();
 
   const filteredContacts = keyword
     ? searchContacts(dataContacts, keyword)
@@ -61,6 +78,7 @@ function addContact(event) {
 
   const formData = new FormData(this);
 
+  const dataContacts = loadContacts();
   const nextId = dataContacts[dataContacts.length - 1].id + 1;
 
   const newContact = {
@@ -75,8 +93,9 @@ function addContact(event) {
     birthday: new Date("2000-01-01"),
   };
 
-  dataContacts = [...dataContacts, newContact];
+  const newDataContacts = [...dataContacts, newContact];
 
+  saveContacts(newDataContacts);
   renderContacts();
 }
 
