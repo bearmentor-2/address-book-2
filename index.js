@@ -26,7 +26,7 @@ function renderContacts() {
         <p>Age: ${contact.age} years old</p>
         <p>Email: ${contact.email}</p>
         <p>Phone: ${contact.phone}</p>
-        <p>Bithday: ${contact.birthday}</p>
+        <p>Birthday: ${contact.birthday}</p>
         <p>Address: ${contact.address}</p>
         <p>${aliveText}</p>
       </a>
@@ -45,16 +45,19 @@ function addContact(event) {
   const dataContacts = loadContacts();
   const nextId = dataContacts[dataContacts.length - 1].id + 1;
 
+  const today = new Date();
+  const birthday = new Date(formData.get("birthday"));
+
   const newContact = {
     id: nextId,
     fullName: formData.get("full-name"),
-    nickName: "",
+    nickName: formData.get("nick-name"),
     email: formData.get("email"),
     phone: formData.get("phone"),
-    age: 0,
+    birthday: birthday,
+    age: today.getFullYear() - birthday.getFullYear(),
     isAlive: true,
-    address: "",
-    birthday: new Date("2000-01-01"),
+    address: formData.get("address"),
   };
 
   const newDataContacts = [...dataContacts, newContact];
