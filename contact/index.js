@@ -17,7 +17,7 @@ function renderContactById() {
     <p>Age: ${contact.age} years old</p>
     <p>Email: ${contact.email}</p>
     <p>Phone: ${contact.phone}</p>
-    <p>Bithday: ${contact.birthday}</p>
+    <p>Birthday: ${contact.birthday.getFormattedDate()}</p>
     <p>Address: ${contact.address}</p>
     <p>${aliveText}</p>
   </div>`;

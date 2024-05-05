@@ -13,10 +13,9 @@ function renderContacts() {
     ? searchContacts(dataContacts, keyword)
     : dataContacts;
 
-  const contactsToDisplay = structuredClone(filteredContacts);
+  console.log(filteredContacts[0].birthday.getFormattedDate());
 
-  const contactsString = contactsToDisplay
-    .reverse()
+  const contactsString = filteredContacts
     .map((contact) => {
       const aliveText = contact.isAlive ? "Still alive" : "Rest in peace";
 
@@ -26,7 +25,7 @@ function renderContacts() {
         <p>Age: ${contact.age} years old</p>
         <p>Email: ${contact.email}</p>
         <p>Phone: ${contact.phone}</p>
-        <p>Birthday: ${contact.birthday}</p>
+        <p>Birthday: ${contact.birthday.getFormattedDate()}</p>
         <p>Address: ${contact.address}</p>
         <p>${aliveText}</p>
       </a>
@@ -45,8 +44,8 @@ function addContact(event) {
   const dataContacts = loadContacts();
   const nextId = dataContacts[dataContacts.length - 1].id + 1;
 
-  const today = new Date();
-  const birthday = new Date(formData.get("birthday"));
+  const today = new DateFormatter();
+  const birthday = new DateFormatter(formData.get("birthday"));
 
   const newContact = {
     id: nextId,

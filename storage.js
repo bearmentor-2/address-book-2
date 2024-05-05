@@ -8,7 +8,7 @@ let initialDataContacts = [
     age: 56,
     isAlive: false,
     address: "Palo Alto, California, USA",
-    birthday: new Date("1955-02-24"),
+    birthday: new DateFormatter("1955-02-24"),
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ let initialDataContacts = [
     age: 68,
     isAlive: true,
     address: "Seattle, Washington, USA",
-    birthday: new Date("1955-10-28"),
+    birthday: new DateFormatter("1955-10-28"),
   },
 ];
 
@@ -28,7 +28,14 @@ function saveContacts(newDataContacts) {
 }
 
 function loadContacts() {
-  const dataContacts = JSON.parse(localStorage.getItem("dataContacts"));
+  const dataContactsJSON = JSON.parse(localStorage.getItem("dataContacts"));
+
+  const dataContacts = dataContactsJSON.map((contact) => {
+    return {
+      ...contact,
+      birthday: new DateFormatter(contact.birthday),
+    };
+  });
 
   if (!dataContacts) {
     saveContacts(initialDataContacts);
