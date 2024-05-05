@@ -1,9 +1,11 @@
 const addContactFormElement = document.getElementById("add-contact-form");
 const contactsListElement = document.getElementById("contacts");
+const searchKeywordInputElement = document.getElementById("search-keyword");
 
 function renderContacts() {
   const searchParams = new URLSearchParams(window.location.search);
   const keyword = searchParams.get("q");
+  searchKeywordInputElement.value = keyword;
 
   const dataContacts = loadContacts();
 
